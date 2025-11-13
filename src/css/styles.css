@@ -38,6 +38,19 @@ body {
   border-radius: 5px;
 }
 
+.main-input button {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  background-color: #9effef;
+  cursor: pointer;
+  transition: all .5s ease-in-out;
+}
+
+.main-input button:hover {
+  background-color: #94eedf;
+}
+
 .game-thumbnail img{
   border-radius: 10px;
   margin-bottom: 20px;
