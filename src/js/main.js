@@ -26,20 +26,27 @@ function fetchAPI () {
   return result;
 }
 
+function formatString (string) {
+  return string.toLowerCase().trim();
+}
+
 searchButton.addEventListener("click", async () => {
-  let searchedGame = searchInput.value.toLowerCase().trim();
+  let searchedGame = formatString(searchInput.value);
 
   const allGamesData = await fetchAPI();
 
-  const foundGame = allGamesData.find( (game) => searchedGame === game.title.toLowerCase())
+  const foundGame = allGamesData.filter(game => {
+    if (formatString(game.title).indexOf(searchedGame) !== -1) {
+      return game;
+    }
+  });
 
-  if (foundGame) {
-    console.log(foundGame)
-    gameThumbnail.setAttribute("src", foundGame.thumbnail);
-    gameTitle.innerHTML = foundGame.title;
-    gameDescription.innerHTML = foundGame.short_description;
+  if (foundGame[0]) {
+    gameThumbnail.setAttribute("src", foundGame[0].thumbnail);
+    gameTitle.innerHTML = foundGame[0].title;
+    gameDescription.innerHTML = foundGame[0].short_description;
   } else {
-    
+    alert("Nenhum jogo encontrado!");
   }
 
   searchInput.value = "";
